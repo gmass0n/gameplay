@@ -3,14 +3,18 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../styles/theme";
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   label: {
     fontSize: 18,
     fontFamily: theme.fonts.title700,
     color: theme.colors.heading,
+    marginBottom: 12,
   },
   form: {
     paddingHorizontal: 24,
-    marginTop: 32,
+    marginTop: 30,
   },
   select: {
     flexDirection: "row",
@@ -50,5 +54,14 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: theme.fonts.text500,
     color: theme.colors.highlight,
+  },
+  characterLimit: {
+    fontFamily: theme.fonts.text400,
+    fontSize: 13,
+    color: theme.colors.highlight,
+  },
+  footer: {
+    paddingHorizontal: 24,
+    marginVertical: 30,
   },
 });

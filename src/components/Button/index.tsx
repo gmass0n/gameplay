@@ -4,16 +4,12 @@ import { View, Text, Image, ImageSourcePropType } from "react-native";
 
 import { styles } from "./styles";
 
-interface IconButtonProps extends RectButtonProps {
+interface ButtonProps extends RectButtonProps {
   title: string;
   icon?: ImageSourcePropType;
 }
 
-export const IconButton: React.FC<IconButtonProps> = ({
-  title,
-  icon,
-  ...props
-}) => {
+export const Button: React.FC<ButtonProps> = ({ title, icon, ...props }) => {
   return (
     <RectButton style={styles.container} {...props}>
       {icon && (

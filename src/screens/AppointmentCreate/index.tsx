@@ -1,6 +1,13 @@
 import React, { useCallback, useState } from "react";
-import { View, Text } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import {
+  View,
+  Text,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+} from "react-native";
+import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 
 import { Background } from "../../components/Background";
@@ -9,6 +16,7 @@ import { Header } from "../../components/Header";
 import { Avatar } from "../../components/Avatar";
 import { SmallInput } from "../../components/SmallInput";
 import { TextArea } from "../../components/TextArea";
+import { Button } from "../../components/Button";
 
 import { theme } from "../../styles/theme";
 
@@ -26,72 +34,93 @@ export const AppointmentCreate: React.FC = () => {
   }, []);
 
   return (
-    <Background>
-      <Header title="Agendar partida" />
+    <BorderlessButton onPress={Keyboard.dismiss} style={styles.container}>
+      <Background>
+        <Header title="Agendar partida" />
 
-      <Text
-        style={[
-          styles.label,
-          { marginLeft: 24, marginTop: 40, marginBottom: 18 },
-        ]}
-      >
-        Categoria
-      </Text>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <ScrollView>
+            <Text style={[styles.label, { marginLeft: 24, marginTop: 30 }]}>
+              Categoria
+            </Text>
 
-      <CategorySelect
-        hasCheckbox
-        selectedCategory={selectedCategory}
-        onSelectCategory={handleSelectCategory}
-      />
-
-      <View style={styles.form}>
-        <RectButton>
-          <View style={styles.select}>
-            {
-              // <View style={styles.image} />
-              <Avatar size={68} />
-            }
-
-            <View style={styles.selectBody}>
-              <Text style={styles.label}>Selecione um servidor</Text>
-            </View>
-
-            <Feather
-              name="chevron-right"
-              color={theme.colors.heading}
-              size={18}
+            <CategorySelect
+              hasCheckbox
+              selectedCategory={selectedCategory}
+              onSelectCategory={handleSelectCategory}
             />
-          </View>
-        </RectButton>
 
-        <View style={styles.field}>
-          <View>
-            <Text style={styles.label}>Dia e mês</Text>
+            <View style={styles.form}>
+              <RectButton>
+                <View style={styles.select}>
+                  {
+                    // <View style={styles.image} />
+                    <Avatar size={68} />
+                  }
 
-            <View style={styles.column}>
-              <SmallInput maxLength={2} />
+                  <View style={styles.selectBody}>
+                    <Text style={[styles.label, { marginBottom: 0 }]}>
+                      Selecione um servidor
+                    </Text>
+                  </View>
 
-              <Text style={styles.divider}>/</Text>
+                  <Feather
+                    name="chevron-right"
+                    color={theme.colors.heading}
+                    size={18}
+                  />
+                </View>
+              </RectButton>
 
-              <SmallInput maxLength={2} />
+              <View style={styles.field}>
+                <View>
+                  <Text style={styles.label}>Dia e mês</Text>
+
+                  <View style={styles.column}>
+                    <SmallInput maxLength={2} />
+
+                    <Text style={styles.divider}>/</Text>
+
+                    <SmallInput maxLength={2} />
+                  </View>
+                </View>
+
+                <View>
+                  <Text style={styles.label}>Horário</Text>
+
+                  <View style={styles.column}>
+                    <SmallInput maxLength={2} />
+
+                    <Text style={styles.divider}>:</Text>
+
+                    <SmallInput maxLength={2} />
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.field}>
+                <Text style={styles.label}>Descrição</Text>
+
+                <Text style={styles.characterLimit}>Max 100 caracteres</Text>
+              </View>
+
+              <TextArea
+                multiline
+                maxLength={100}
+                numberOfLines={5}
+                autoCorrect={false}
+              />
             </View>
-          </View>
 
-          <View>
-            <Text style={styles.label}>Horário</Text>
-
-            <View style={styles.column}>
-              <SmallInput maxLength={2} />
-
-              <Text style={styles.divider}>:</Text>
-
-              <SmallInput maxLength={2} />
+            <View style={styles.footer}>
+              <Button title="Agendar" />
             </View>
-          </View>
-        </View>
-
-        <TextArea />
-      </View>
-    </Background>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </Background>
+    </BorderlessButton>
   );
 };

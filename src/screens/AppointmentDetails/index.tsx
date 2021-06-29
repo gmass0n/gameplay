@@ -6,7 +6,7 @@ import { Feather } from "@expo/vector-icons";
 import { Background } from "../../components/Background";
 import { Header } from "../../components/Header";
 import { ListHeader } from "../../components/ListHeader";
-import { IconButton } from "../../components/IconButton";
+import { Button } from "../../components/Button";
 import { Member, MemberProps } from "../../components/Member";
 import { ListDivider } from "../../components/ListDivider";
 
@@ -65,7 +65,7 @@ export const AppointmentDetails: React.FC = () => {
       />
 
       <View style={styles.footer}>
-        <IconButton title="Entrar na partida" icon={discordImg} />
+        <Button title="Entrar na partida" icon={discordImg} />
       </View>
     </Background>
   );
