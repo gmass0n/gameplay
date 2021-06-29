@@ -10,12 +10,12 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 24,
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: isIphoneX() ? getStatusBarHeight() + 26 : 26,
-    marginBottom: 40,
+    marginTop: isIphoneX() ? getStatusBarHeight() + 38 : 24,
+    marginBottom: 30,
   },
   content: {
     flex: 1,
-    marginTop: 40,
+    marginTop: 30,
   },
   matches: {
     marginTop: 12,
