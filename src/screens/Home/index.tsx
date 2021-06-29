@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCallback } from "react";
 import { View, FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { AddButton } from "../../components/AddButton";
 import { Appointment } from "../../components/Appointment";
@@ -40,6 +41,8 @@ const appointments = [
 ];
 
 export const Home: React.FC = () => {
+  const navigation = useNavigation();
+
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleSelectCategory = useCallback((categoryId: string) => {
@@ -49,6 +52,10 @@ export const Home: React.FC = () => {
       return categoryId;
     });
   }, []);
+
+  function handleNavigateToDetails(): void {
+    navigation.navigate("AppointmentDetails");
+  }
 
   return (
     <Background>
@@ -74,7 +81,10 @@ export const Home: React.FC = () => {
             keyExtractor={(appointment) => appointment.id}
             ItemSeparatorComponent={() => <ListDivider />}
             renderItem={({ item: appointment }) => (
-              <Appointment data={appointment} />
+              <Appointment
+                data={appointment}
+                onPress={() => handleNavigateToDetails()}
+              />
             )}
           />
         </View>

@@ -8,7 +8,7 @@ import { styles } from "./styles";
 export const Profile: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Avatar url="https://github.com/gmass0n.png" />
+      <Avatar url="https://github.com/gmass0n.png" size={50} />
 
       <View>
         <View style={styles.user}>

@@ -6,7 +6,7 @@ import { styles } from "./styles";
 
 interface IconButtonProps extends RectButtonProps {
   title: string;
-  icon: ImageSourcePropType;
+  icon?: ImageSourcePropType;
 }
 
 export const IconButton: React.FC<IconButtonProps> = ({
@@ -16,9 +16,11 @@ export const IconButton: React.FC<IconButtonProps> = ({
 }) => {
   return (
     <RectButton style={styles.container} {...props}>
-      <View style={styles.iconWrapper}>
-        <Image source={icon} style={styles.icon} />
-      </View>
+      {icon && (
+        <View style={styles.iconWrapper}>
+          <Image source={icon} style={styles.icon} />
+        </View>
+      )}
 
       <Text style={styles.title}>{title}</Text>
     </RectButton>

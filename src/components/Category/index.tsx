@@ -19,7 +19,7 @@ export const Category: React.FC<CategoryProps> = ({
   title,
   icon: Icon,
   checked = false,
-  hasCheckbox = true,
+  hasCheckbox = false,
   ...props
 }) => {
   const {

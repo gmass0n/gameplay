@@ -9,7 +9,7 @@ import { categories } from "../../utils/categories";
 
 import { theme } from "../../styles/theme";
 
-import { GuildIcon } from "../GuildIcon";
+import { Avatar } from "../Avatar";
 
 import { styles } from "./styles";
 
@@ -41,7 +41,7 @@ export const Appointment: React.FC<Props> = ({ data, ...props }) => {
   return (
     <RectButton {...props}>
       <View style={styles.container}>
-        <GuildIcon />
+        <Avatar />
 
         <View style={styles.content}>
           <View style={styles.header}>
