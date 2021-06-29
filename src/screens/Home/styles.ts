@@ -11,5 +11,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: isIphoneX() ? getStatusBarHeight() + 26 : 26,
+    marginBottom: 42,
   },
 });

@@ -2,8 +2,8 @@ import React from "react";
 import { View, Image, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import discordImg from "../../assets/discord.png";
-import illustrationImg from "../../assets/illustration.png";
+import discordImg from "../../assets/images/discord.png";
+import illustrationImg from "../../assets/images/illustration.png";
 
 import { IconButton } from "../../components/IconButton";
 

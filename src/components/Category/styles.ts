@@ -1,0 +1,47 @@
+import { StyleSheet } from "react-native";
+import { theme } from "../../styles/theme";
+
+export const styles = StyleSheet.create({
+  container: {
+    width: 108,
+    height: 120,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    marginRight: 8,
+  },
+  content: {
+    width: "100%",
+    height: 116,
+    backgroundColor: theme.colors.secondary40,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 8,
+  },
+  title: {
+    fontFamily: theme.fonts.title500,
+    color: theme.colors.heading,
+    fontSize: 15,
+  },
+  check: {
+    width: 13,
+    height: 13,
+    backgroundColor: theme.colors.secondary100,
+    alignSelf: "flex-end",
+    marginRight: 8,
+    borderColor: theme.colors.secondary50,
+    borderWidth: 2,
+    borderRadius: 3,
+  },
+  checked: {
+    width: 13,
+    height: 13,
+    backgroundColor: theme.colors.primary,
+    alignSelf: "flex-end",
+    marginRight: 8,
+    borderColor: theme.colors.secondary50,
+    borderWidth: 2,
+    borderRadius: 3,
+  },
+});
