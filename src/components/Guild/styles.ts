@@ -5,20 +5,24 @@ import { theme } from "../../styles/theme";
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 96,
-    borderRadius: 8,
-    padding: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 24,
+    paddingVertical: 12,
   },
   content: {
     flex: 1,
-    borderRadius: 8,
-    padding: 12,
+    justifyContent: "center",
   },
-  textarea: {
-    flex: 1,
-    borderRadius: 8,
+  title: {
+    fontFamily: theme.fonts.title700,
     color: theme.colors.heading,
+    fontSize: 18,
+    marginBottom: 5,
+  },
+  type: {
     fontFamily: theme.fonts.text400,
+    color: theme.colors.highlight,
     fontSize: 13,
   },
 });

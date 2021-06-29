@@ -9,7 +9,7 @@ import { theme } from "../../styles/theme";
 import { styles } from "./styles";
 
 interface AvatarProps {
-  url?: string;
+  url?: string | null;
   size?: number;
 }
 
