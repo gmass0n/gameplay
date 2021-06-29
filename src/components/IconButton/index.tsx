@@ -4,12 +4,12 @@ import { View, Text, Image, ImageSourcePropType } from "react-native";
 
 import { styles } from "./styles";
 
-interface ButtonIconProps extends RectButtonProps {
+interface IconButtonProps extends RectButtonProps {
   title: string;
   icon: ImageSourcePropType;
 }
 
-export const ButtonIcon: React.FC<ButtonIconProps> = ({
+export const IconButton: React.FC<IconButtonProps> = ({
   title,
   icon,
   ...props

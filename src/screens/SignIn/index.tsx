@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import discordImg from "../../assets/discord.png";
 import illustrationImg from "../../assets/illustration.png";
 
-import { ButtonIcon } from "../../components/ButtonIcon";
+import { IconButton } from "../../components/IconButton";
 
 import { styles } from "./styles";
 
@@ -32,7 +32,7 @@ export const SignIn: React.FC = () => {
           favoritos com seus amigos
         </Text>
 
-        <ButtonIcon
+        <IconButton
           icon={discordImg}
           title="Entrar com Discord"
           onPress={handleSignIn}
