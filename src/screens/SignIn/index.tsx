@@ -6,6 +6,7 @@ import discordImg from "../../assets/images/discord.png";
 import illustrationImg from "../../assets/images/illustration.png";
 
 import { IconButton } from "../../components/IconButton";
+import { Background } from "../../components/Background";
 
 import { styles } from "./styles";
 
@@ -17,27 +18,29 @@ export const SignIn: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Image source={illustrationImg} style={styles.image} />
+    <Background>
+      <View style={styles.container}>
+        <Image source={illustrationImg} style={styles.image} />
 
-      <View style={styles.content}>
-        <Text style={styles.title}>
-          Organize{"\n"}
-          suas jogatinas{"\n"}
-          facilmente
-        </Text>
+        <View style={styles.content}>
+          <Text style={styles.title}>
+            Organize{"\n"}
+            suas jogatinas{"\n"}
+            facilmente
+          </Text>
 
-        <Text style={styles.subtitle}>
-          Crie grupos para jogar seus games {"\n"}
-          favoritos com seus amigos
-        </Text>
+          <Text style={styles.subtitle}>
+            Crie grupos para jogar seus games {"\n"}
+            favoritos com seus amigos
+          </Text>
 
-        <IconButton
-          icon={discordImg}
-          title="Entrar com Discord"
-          onPress={handleSignIn}
-        />
+          <IconButton
+            icon={discordImg}
+            title="Entrar com Discord"
+            onPress={handleSignIn}
+          />
+        </View>
       </View>
-    </View>
+    </Background>
   );
 };

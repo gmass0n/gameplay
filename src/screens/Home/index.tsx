@@ -4,6 +4,7 @@ import { View, FlatList } from "react-native";
 
 import { AddButton } from "../../components/AddButton";
 import { Appointment } from "../../components/Appointment";
+import { Background } from "../../components/Background";
 import { CategorySelect } from "../../components/CategorySelect";
 import { ListHeader } from "../../components/ListHeader";
 import { ListDivider } from "../../components/ListDivider";
@@ -50,32 +51,34 @@ export const Home: React.FC = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Profile />
+    <Background>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Profile />
 
-        <AddButton />
-      </View>
+          <AddButton />
+        </View>
 
-      <CategorySelect
-        selectedCategory={selectedCategory}
-        onSelectCategory={handleSelectCategory}
-      />
-
-      <View style={styles.content}>
-        <ListHeader title="Partidas agendadas" subtitle="8 partidas" />
-
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          style={styles.matches}
-          data={appointments}
-          keyExtractor={(appointment) => appointment.id}
-          ItemSeparatorComponent={() => <ListDivider />}
-          renderItem={({ item: appointment }) => (
-            <Appointment data={appointment} />
-          )}
+        <CategorySelect
+          selectedCategory={selectedCategory}
+          onSelectCategory={handleSelectCategory}
         />
+
+        <View style={styles.content}>
+          <ListHeader title="Partidas agendadas" subtitle="8 partidas" />
+
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            style={styles.matches}
+            data={appointments}
+            keyExtractor={(appointment) => appointment.id}
+            ItemSeparatorComponent={() => <ListDivider />}
+            renderItem={({ item: appointment }) => (
+              <Appointment data={appointment} />
+            )}
+          />
+        </View>
       </View>
-    </View>
+    </Background>
   );
 };

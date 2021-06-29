@@ -8,10 +8,7 @@ const { Navigator, Screen } = createStackNavigator();
 
 export const AuthRoutes: React.FC = () => {
   return (
-    <Navigator
-      headerMode="none"
-      screenOptions={{ cardStyle: { backgroundColor: "transparent" } }}
-    >
+    <Navigator headerMode="none">
       <Screen name="SignIn" component={SignIn} />
 
       <Screen name="Home" component={Home} />
