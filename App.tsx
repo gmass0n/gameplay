@@ -8,7 +8,7 @@ import {
   Rajdhani_700Bold,
 } from "@expo-google-fonts/rajdhani";
 
-import { SignIn } from "./src/screens/SignIn";
+import { Home } from "./src/screens/Home";
 
 import { Background } from "./src/components/Background";
 
@@ -32,7 +32,7 @@ export default function App() {
         translucent
       />
 
-      <SignIn />
+      <Home />
     </Background>
   );
 }
