@@ -1,16 +1,10 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  Image,
-  TouchableOpacityProps,
-  ImageSourcePropType,
-} from "react-native";
+import { RectButton, RectButtonProps } from "react-native-gesture-handler";
+import { View, Text, Image, ImageSourcePropType } from "react-native";
 
 import { styles } from "./styles";
 
-interface ButtonIconProps extends TouchableOpacityProps {
+interface ButtonIconProps extends RectButtonProps {
   title: string;
   icon: ImageSourcePropType;
 }
@@ -21,12 +15,12 @@ export const ButtonIcon: React.FC<ButtonIconProps> = ({
   ...props
 }) => {
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.7} {...props}>
+    <RectButton style={styles.container} {...props}>
       <View style={styles.iconWrapper}>
         <Image source={icon} style={styles.icon} />
       </View>
 
       <Text style={styles.title}>{title}</Text>
-    </TouchableOpacity>
+    </RectButton>
   );
 };

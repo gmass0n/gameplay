@@ -8,9 +8,9 @@ import {
   Rajdhani_700Bold,
 } from "@expo-google-fonts/rajdhani";
 
-import { Home } from "./src/screens/Home";
-
 import { Background } from "./src/components/Background";
+
+import { Routes } from "./src/routes";
 
 export default function App() {
   const [isFontsLoaded] = useFonts({
@@ -32,7 +32,7 @@ export default function App() {
         translucent
       />
 
-      <Home />
+      <Routes />
     </Background>
   );
 }

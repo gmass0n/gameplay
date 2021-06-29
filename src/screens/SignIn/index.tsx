@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import discordImg from "../../assets/discord.png";
 import illustrationImg from "../../assets/illustration.png";
@@ -9,6 +10,12 @@ import { ButtonIcon } from "../../components/ButtonIcon";
 import { styles } from "./styles";
 
 export const SignIn: React.FC = () => {
+  const navigation = useNavigation();
+
+  function handleSignIn(): void {
+    navigation.navigate("Home");
+  }
+
   return (
     <View style={styles.container}>
       <Image source={illustrationImg} style={styles.image} />
@@ -25,7 +32,11 @@ export const SignIn: React.FC = () => {
           favoritos com seus amigos
         </Text>
 
-        <ButtonIcon icon={discordImg} title="Entrar com Discord" />
+        <ButtonIcon
+          icon={discordImg}
+          title="Entrar com Discord"
+          onPress={handleSignIn}
+        />
       </View>
     </View>
   );
