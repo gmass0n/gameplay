@@ -1,12 +1,42 @@
 import React, { useState } from "react";
 import { useCallback } from "react";
-import { View } from "react-native";
+import { View, FlatList } from "react-native";
 
 import { AddButton } from "../../components/AddButton";
+import { Appointment } from "../../components/Appointment";
 import { CategorySelect } from "../../components/CategorySelect";
+import { ListHeader } from "../../components/ListHeader";
+import { ListDivider } from "../../components/ListDivider";
 import { Profile } from "../../components/Profile";
 
 import { styles } from "./styles";
+
+const appointments = [
+  {
+    id: "1",
+    guild: {
+      id: "1",
+      name: "Lendarários",
+      icon: null,
+      owner: true,
+    },
+    category: "1",
+    date: "22/06 às 20:40h",
+    description: "É hoje que vamos chegar ao challenger...",
+  },
+  {
+    id: "2",
+    guild: {
+      id: "1",
+      name: "Lendarários",
+      icon: null,
+      owner: true,
+    },
+    category: "1",
+    date: "22/06 às 20:40h",
+    description: "É hoje que vamos chegar ao challenger...",
+  },
+];
 
 export const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -27,10 +57,23 @@ export const Home: React.FC = () => {
         <AddButton />
       </View>
 
-      <View>
-        <CategorySelect
-          selectedCategory={selectedCategory}
-          onSelectCategory={handleSelectCategory}
+      <CategorySelect
+        selectedCategory={selectedCategory}
+        onSelectCategory={handleSelectCategory}
+      />
+
+      <View style={styles.content}>
+        <ListHeader title="Partidas agendadas" subtitle="8 partidas" />
+
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          style={styles.matches}
+          data={appointments}
+          keyExtractor={(appointment) => appointment.id}
+          ItemSeparatorComponent={() => <ListDivider />}
+          renderItem={({ item: appointment }) => (
+            <Appointment data={appointment} />
+          )}
         />
       </View>
     </View>

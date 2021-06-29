@@ -13,4 +13,11 @@ export const styles = StyleSheet.create({
     marginTop: isIphoneX() ? getStatusBarHeight() + 26 : 26,
     marginBottom: 42,
   },
+  content: {
+    flex: 1,
+    marginTop: 42,
+  },
+  matches: {
+    marginTop: 12,
+  },
 });
