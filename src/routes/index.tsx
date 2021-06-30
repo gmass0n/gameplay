@@ -1,12 +1,17 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 
-import { AuthRoutes } from "./AuthRoutes";
+import { useAuth } from "../hooks/auth";
+
+import { SignIn } from "../screens/SignIn";
+
+import { AuthenticatedRoutes } from "./AuthenticatedRoutes";
 
 export const Routes: React.FC = () => {
-  return (
-    <NavigationContainer>
-      <AuthRoutes />
-    </NavigationContainer>
-  );
+  const { user } = useAuth();
+
+  if (!user) {
+    return <SignIn />;
+  }
+
+  return <AuthenticatedRoutes />;
 };

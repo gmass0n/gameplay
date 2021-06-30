@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
-import { StackActions, useNavigation } from "@react-navigation/native";
+import { View, Image, Text, Alert } from "react-native";
 
 import discordImg from "../../assets/images/discord.png";
 import illustrationImg from "../../assets/images/illustration.png";
@@ -8,13 +7,19 @@ import illustrationImg from "../../assets/images/illustration.png";
 import { Button } from "../../components/Button";
 import { Background } from "../../components/Background";
 
+import { useAuth } from "../../hooks/auth";
+
 import { styles } from "./styles";
 
 export const SignIn: React.FC = () => {
-  const navigation = useNavigation();
+  const { signIn, isSigning } = useAuth();
 
-  function handleSignIn(): void {
-    navigation.dispatch(StackActions.replace("Home"));
+  async function handleSignIn(): Promise<void> {
+    try {
+      await signIn();
+    } catch (error) {
+      Alert.alert(error);
+    }
   }
 
   return (
@@ -38,6 +43,7 @@ export const SignIn: React.FC = () => {
             icon={discordImg}
             title="Entrar com Discord"
             onPress={handleSignIn}
+            isLoading={isSigning}
           />
         </View>
       </View>

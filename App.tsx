@@ -10,6 +10,8 @@ import {
 
 import { Routes } from "./src/routes";
 
+import { AuthProvider } from "./src/hooks/auth";
+
 export default function App() {
   const [isFontsLoaded] = useFonts({
     Inter_400Regular,
@@ -30,7 +32,9 @@ export default function App() {
         translucent
       />
 
-      <Routes />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </>
   );
 }

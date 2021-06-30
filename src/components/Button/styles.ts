@@ -11,6 +11,9 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
+  loadingContainer: {
+    width: "100%",
+  },
   iconWrapper: {
     width: 56,
     height: 56,
