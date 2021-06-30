@@ -12,7 +12,7 @@ import { useAuth } from "../../hooks/auth";
 import { styles } from "./styles";
 
 export const SignIn: React.FC = () => {
-  const { signIn, isSigning } = useAuth();
+  const { signIn, isLoading } = useAuth();
 
   async function handleSignIn(): Promise<void> {
     try {
@@ -43,7 +43,7 @@ export const SignIn: React.FC = () => {
             icon={discordImg}
             title="Entrar com Discord"
             onPress={handleSignIn}
-            isLoading={isSigning}
+            isLoading={isLoading}
           />
         </View>
       </View>
