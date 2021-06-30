@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCallback } from "react";
 import { View, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
 
 import { AddButton } from "../../components/AddButton";
 import { Appointment } from "../../components/Appointment";
@@ -81,6 +82,9 @@ export const Home: React.FC = () => {
           <FlatList
             showsVerticalScrollIndicator={false}
             style={styles.matches}
+            contentContainerStyle={{
+              paddingBottom: isIphoneX() ? getBottomSpace() : 24,
+            }}
             data={appointments}
             keyExtractor={(appointment) => appointment.id}
             ItemSeparatorComponent={() => <ListDivider />}

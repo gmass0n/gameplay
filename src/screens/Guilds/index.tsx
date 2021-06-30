@@ -1,5 +1,6 @@
 import React from "react";
 import { View, FlatList } from "react-native";
+import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
 
 import { Guild, GuildProps } from "../../components/Guild";
 import { ListDivider } from "../../components/ListDivider";
@@ -37,6 +38,9 @@ export const Guilds: React.FC<GuildsProps> = ({ onSelecteGuild }) => {
         )}
         showsVerticalScrollIndicator={false}
         style={styles.guilds}
+        contentContainerStyle={{
+          paddingBottom: isIphoneX() ? getBottomSpace() : 24,
+        }}
       />
     </View>
   );

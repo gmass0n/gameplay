@@ -15,7 +15,7 @@ export const ModalView: React.FC<ModalViewProps> = ({
   ...props
 }) => {
   return (
-    <Modal transparent animationType="slide" {...props}>
+    <Modal transparent animationType="slide" statusBarTranslucent {...props}>
       <TouchableOpacity
         style={styles.overlay}
         activeOpacity={1}
