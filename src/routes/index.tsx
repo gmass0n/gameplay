@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/auth";
 
 import { SignIn } from "../screens/SignIn";
 
-import { AuthenticatedRoutes } from "./AuthenticatedRoutes";
+import { AppRoutes } from "./AppRoutes";
 
 export const Routes: React.FC = () => {
   const { user } = useAuth();
@@ -13,5 +13,5 @@ export const Routes: React.FC = () => {
     return <SignIn />;
   }
 
-  return <AuthenticatedRoutes />;
+  return <AppRoutes />;
 };

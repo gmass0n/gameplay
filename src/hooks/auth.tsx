@@ -1,13 +1,11 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
 import * as AuthSession from "expo-auth-session";
 
-import {
-  CDN_IMAGE,
-  CLIENT_ID,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SCOPE,
-} from "../configs/discordAuth";
+const { CDN_IMAGE } = process.env;
+const { CLIENT_ID } = process.env;
+const { REDIRECT_URI } = process.env;
+const { RESPONSE_TYPE } = process.env;
+const { SCOPE } = process.env;
 
 import { api } from "../services/api";
 
@@ -22,7 +20,8 @@ interface User {
 
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
   params: {
-    access_token: string;
+    access_token?: string;
+    error?: string;
   };
 };
 
@@ -48,24 +47,22 @@ const AuthProvider: React.FC = ({ children }) => {
         authUrl,
       })) as AuthorizationResponse;
 
-      if (type !== "success") {
-        throw new Error("Não foi possível autenticar!");
+      if (type === "success" && !params.error) {
+        api.defaults.headers.authorization = `Bearer ${params.access_token}`;
+
+        const { data: discordUser } = await api.get("/users/@me");
+
+        const firstName = discordUser.username.split(" ")[0];
+        const avatar =
+          discordUser.avatar &&
+          `${CDN_IMAGE}/avatars/${discordUser.id}/${discordUser.avatar}.png`;
+
+        setUser({
+          ...discordUser,
+          firstName,
+          avatar,
+        });
       }
-
-      api.defaults.headers.authorization = `Bearer ${params.access_token}`;
-
-      const { data: discordUser } = await api.get("/users/@me");
-
-      const firstName = discordUser.username.split(" ")[0];
-      const avatar =
-        discordUser.avatar &&
-        `${CDN_IMAGE}/avatars/${discordUser.id}/${discordUser.avatar}.png`;
-
-      setUser({
-        ...discordUser,
-        firstName,
-        avatar,
-      });
     } catch (error) {
       throw new Error("Não foi possível autenticar!");
     } finally {

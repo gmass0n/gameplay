@@ -10,7 +10,7 @@ import { theme } from "../styles/theme";
 
 const { Navigator, Screen } = createStackNavigator();
 
-export const AuthenticatedRoutes: React.FC = () => {
+export const AppRoutes: React.FC = () => {
   return (
     <NavigationContainer>
       <Navigator
