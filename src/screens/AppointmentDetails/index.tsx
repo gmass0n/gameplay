@@ -1,5 +1,13 @@
 import React, { useState, useCallback } from "react";
-import { View, Text, ImageBackground, FlatList, Alert } from "react-native";
+import {
+  View,
+  Text,
+  ImageBackground,
+  FlatList,
+  Alert,
+  Platform,
+  Share,
+} from "react-native";
 import { useFocusEffect, useRoute } from "@react-navigation/native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
@@ -52,14 +60,31 @@ export const AppointmentDetails: React.FC = () => {
     }, [appointment.guild.id])
   );
 
+  function handleShareInvitation(): void {
+    const instantInvite = guild!.instant_invite as string;
+
+    const message =
+      Platform.OS === "ios"
+        ? `Junte-se a ${appointment.guild.name}`
+        : instantInvite;
+
+    Share.share({
+      message,
+      url: instantInvite,
+    });
+  }
+
   return (
     <Background>
       <Header
         title="Detalhes"
         action={
-          <BorderlessButton>
-            <Feather name="share-2" size={22} color={theme.colors.primary} />
-          </BorderlessButton>
+          guild?.instant_invite &&
+          appointment.guild.owner && (
+            <BorderlessButton onPress={handleShareInvitation}>
+              <Feather name="share-2" size={22} color={theme.colors.primary} />
+            </BorderlessButton>
+          )
         }
       />
 

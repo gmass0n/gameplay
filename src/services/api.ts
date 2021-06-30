@@ -19,6 +19,7 @@ export interface WidgetGuild {
   id: string;
   name: string;
   members: Member[];
+  instant_invite: string | null;
 }
 
 const { CDN_IMAGE } = process.env;

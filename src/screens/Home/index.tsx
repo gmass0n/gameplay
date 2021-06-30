@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { View, FlatList } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
