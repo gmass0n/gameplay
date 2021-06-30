@@ -4,10 +4,15 @@ import { theme } from "../../styles/theme";
 
 export const styles = StyleSheet.create({
   container: {
-    height: 48,
-    width: 48,
+    position: "absolute",
+    right: 24,
+    bottom: 24,
+  },
+  button: {
+    height: 56,
+    width: 56,
+    borderRadius: 56 / 2,
     backgroundColor: theme.colors.primary,
-    borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
   },
