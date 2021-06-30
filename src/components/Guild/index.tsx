@@ -8,24 +8,18 @@ import { Avatar } from "../Avatar";
 import { theme } from "../../styles/theme";
 
 import { styles } from "./styles";
-
-export interface GuildProps {
-  id: string;
-  name: string;
-  icon: string | null;
-  owner: boolean;
-}
+import { Guild as GuildProps } from "../../services/api";
 
 interface Props extends RectButtonProps {
   data: GuildProps;
 }
 
 export const Guild: React.FC<Props> = ({ data, ...props }) => {
-  const { name, owner } = data;
+  const { name, owner, icon } = data;
 
   return (
     <RectButton style={styles.container} {...props}>
-      <Avatar size={54} />
+      <Avatar size={54} url={icon} />
 
       <View style={styles.content}>
         <View>

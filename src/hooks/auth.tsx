@@ -69,7 +69,9 @@ const AuthProvider: React.FC = ({ children }) => {
       })) as AuthorizationResponse;
 
       if (type === "success" && !params.error) {
-        api.defaults.headers.authorization = `Bearer ${params.access_token}`;
+        const token = params.access_token;
+
+        api.defaults.headers.authorization = `Bearer ${token}`;
 
         const { data: discordUser } = await api.get("/users/@me");
 
@@ -82,6 +84,7 @@ const AuthProvider: React.FC = ({ children }) => {
           ...discordUser,
           firstName,
           avatar,
+          token,
         };
 
         await AsyncStorage.setItem(STORAGE_USER_KEY, JSON.stringify(data));
