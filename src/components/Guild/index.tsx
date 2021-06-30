@@ -3,12 +3,13 @@ import { View, Text } from "react-native";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 
-import { Avatar } from "../Avatar";
-
 import { theme } from "../../styles/theme";
 
-import { styles } from "./styles";
 import { Guild as GuildProps } from "../../services/api";
+
+import { Avatar } from "../Avatar";
+
+import { styles } from "./styles";
 
 interface Props extends RectButtonProps {
   data: GuildProps;

@@ -41,7 +41,7 @@ export const Appointment: React.FC<Props> = ({ data, ...props }) => {
   return (
     <RectButton {...props}>
       <View style={styles.container}>
-        <Avatar />
+        <Avatar url={guild.icon} />
 
         <View style={styles.content}>
           <View style={styles.header}>

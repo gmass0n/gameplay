@@ -35,6 +35,17 @@ export const Guilds: React.FC<GuildsProps> = ({ onSelecteGuild }) => {
     })();
   }, []);
 
+  function handleSelectGuild(guild: GuildProps): void {
+    const { icon, id, name, owner } = guild;
+
+    onSelecteGuild({
+      icon,
+      id,
+      name,
+      owner,
+    });
+  }
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -45,7 +56,7 @@ export const Guilds: React.FC<GuildsProps> = ({ onSelecteGuild }) => {
           keyExtractor={(guild) => guild.id}
           ItemSeparatorComponent={() => <ListDivider />}
           renderItem={({ item: guild }) => (
-            <Guild data={guild} onPress={() => onSelecteGuild(guild)} />
+            <Guild data={guild} onPress={() => handleSelectGuild(guild)} />
           )}
           showsVerticalScrollIndicator={false}
           style={styles.guilds}

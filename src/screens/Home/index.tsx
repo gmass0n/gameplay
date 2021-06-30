@@ -1,50 +1,61 @@
 import React, { useState } from "react";
 import { useCallback } from "react";
 import { View, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { AddButton } from "../../components/AddButton";
-import { Appointment } from "../../components/Appointment";
+import { Appointment, AppointmentProps } from "../../components/Appointment";
 import { Background } from "../../components/Background";
 import { CategorySelect } from "../../components/CategorySelect";
 import { ListHeader } from "../../components/ListHeader";
 import { ListDivider } from "../../components/ListDivider";
 import { Profile } from "../../components/Profile";
 
-import { styles } from "./styles";
+import { STORAGE_APPOINTMENTS_KEY } from "../../configs/storage";
 
-const appointments = [
-  {
-    id: "1",
-    guild: {
-      id: "1",
-      name: "Lendarários",
-      icon: null,
-      owner: true,
-    },
-    category: "1",
-    date: "22/06 às 20:40h",
-    description: "É hoje que vamos chegar ao challenger...",
-  },
-  {
-    id: "2",
-    guild: {
-      id: "1",
-      name: "Lendarários",
-      icon: null,
-      owner: true,
-    },
-    category: "1",
-    date: "22/06 às 20:40h",
-    description: "É hoje que vamos chegar ao challenger...",
-  },
-];
+import { styles } from "./styles";
+import { ListLoading } from "../../components/ListLoading";
 
 export const Home: React.FC = () => {
   const navigation = useNavigation();
 
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [appointments, setAppointments] = useState<AppointmentProps[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  async function loadAppointments(): Promise<void> {
+    setIsLoading(true);
+
+    const storagedAppointments = await AsyncStorage.getItem(
+      STORAGE_APPOINTMENTS_KEY
+    );
+    const parsedAppointments: AppointmentProps[] = storagedAppointments
+      ? JSON.parse(storagedAppointments)
+      : [];
+
+    setAppointments(() => {
+      if (selectedCategory) {
+        const filteredAppointments = parsedAppointments.filter(
+          (appointment) => appointment.category === selectedCategory
+        );
+        return filteredAppointments;
+      }
+
+      return parsedAppointments;
+    });
+
+    setIsLoading(false);
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        await loadAppointments();
+      })();
+    }, [selectedCategory])
+  );
 
   const handleSelectCategory = useCallback((categoryId: string) => {
     setSelectedCategory((prevState) => {
@@ -76,26 +87,35 @@ export const Home: React.FC = () => {
           onSelectCategory={handleSelectCategory}
         />
 
-        <View style={styles.content}>
-          <ListHeader title="Partidas agendadas" subtitle="8 partidas" />
+        {isLoading ? (
+          <ListLoading />
+        ) : (
+          <View style={styles.content}>
+            <ListHeader
+              title="Partidas agendadas"
+              subtitle={`${appointments.length} ${
+                appointments.length === 1 ? "partida" : "partidas"
+              }`}
+            />
 
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            style={styles.matches}
-            contentContainerStyle={{
-              paddingBottom: isIphoneX() ? getBottomSpace() : 24,
-            }}
-            data={appointments}
-            keyExtractor={(appointment) => appointment.id}
-            ItemSeparatorComponent={() => <ListDivider />}
-            renderItem={({ item: appointment }) => (
-              <Appointment
-                data={appointment}
-                onPress={() => handleNavigateToDetails()}
-              />
-            )}
-          />
-        </View>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              style={styles.matches}
+              contentContainerStyle={{
+                paddingBottom: isIphoneX() ? getBottomSpace() : 24,
+              }}
+              data={appointments}
+              keyExtractor={(appointment) => appointment.id}
+              ItemSeparatorComponent={() => <ListDivider />}
+              renderItem={({ item: appointment }) => (
+                <Appointment
+                  data={appointment}
+                  onPress={() => handleNavigateToDetails()}
+                />
+              )}
+            />
+          </View>
+        )}
       </View>
     </Background>
   );
