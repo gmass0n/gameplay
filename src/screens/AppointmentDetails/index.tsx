@@ -11,6 +11,7 @@ import {
 import { useFocusEffect, useRoute } from "@react-navigation/native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
+import * as Linking from "expo-linking";
 
 import { Background } from "../../components/Background";
 import { Header } from "../../components/Header";
@@ -61,17 +62,23 @@ export const AppointmentDetails: React.FC = () => {
   );
 
   function handleShareInvitation(): void {
-    const instantInvite = guild!.instant_invite as string;
+    if (!guild?.instant_invite || !appointment.guild.owner) return;
 
     const message =
       Platform.OS === "ios"
         ? `Junte-se a ${appointment.guild.name}`
-        : instantInvite;
+        : guild.instant_invite;
 
     Share.share({
       message,
-      url: instantInvite,
+      url: guild.instant_invite,
     });
+  }
+
+  function handleOpenGuild(): void {
+    if (!guild?.instant_invite) return;
+
+    Linking.openURL(guild.instant_invite);
   }
 
   return (
@@ -102,7 +109,7 @@ export const AppointmentDetails: React.FC = () => {
         <>
           <ListHeader
             title="Jogadores"
-            subtitle={`${guild?.members.length} ${
+            subtitle={`${guild?.members.length || 0} ${
               guild?.members.length === 1 ? "jogador" : "jogadores"
             }`}
           />
@@ -117,9 +124,15 @@ export const AppointmentDetails: React.FC = () => {
         </>
       )}
 
-      <View style={styles.footer}>
-        <Button title="Entrar na partida" icon={discordImg} />
-      </View>
+      {guild?.instant_invite && (
+        <View style={styles.footer}>
+          <Button
+            title="Entrar na partida"
+            icon={discordImg}
+            onPress={handleOpenGuild}
+          />
+        </View>
+      )}
     </Background>
   );
 };
