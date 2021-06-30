@@ -6,10 +6,13 @@ export const styles = StyleSheet.create({
   overlay: {
     backgroundColor: theme.colors.overlay,
     width: "100%",
-    flex: 1,
+    height: "100%",
+    position: "absolute",
   },
   container: {
     width: "100%",
+    position: "absolute",
+    bottom: 0,
   },
   bar: {
     width: 45,

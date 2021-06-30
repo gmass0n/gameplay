@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     paddingBottom: getBottomSpace() + 24,
   },
   titleWrapper: {
-    alignItems: "center",
+    alignItems: "baseline",
     justifyContent: "center",
     flexDirection: "row",
     marginBottom: 24,
