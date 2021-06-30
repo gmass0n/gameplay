@@ -65,8 +65,10 @@ export const Home: React.FC = () => {
     });
   }, []);
 
-  function handleNavigateToDetails(): void {
-    navigation.navigate("AppointmentDetails");
+  function handleNavigateToDetails(appointment: AppointmentProps): void {
+    navigation.navigate("AppointmentDetails", {
+      appointment,
+    });
   }
 
   function handleNavigateToAppointmentCreate(): void {
@@ -110,7 +112,7 @@ export const Home: React.FC = () => {
               renderItem={({ item: appointment }) => (
                 <Appointment
                   data={appointment}
-                  onPress={() => handleNavigateToDetails()}
+                  onPress={() => handleNavigateToDetails(appointment)}
                 />
               )}
             />
