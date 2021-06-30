@@ -1,5 +1,11 @@
 import React from "react";
-import { Modal, View, ModalProps, TouchableOpacity } from "react-native";
+import {
+  Modal,
+  View,
+  ModalProps,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 
 import { Background } from "../Background";
 
@@ -7,11 +13,13 @@ import { styles } from "./styles";
 
 interface ModalViewProps extends ModalProps {
   onClose?(): void;
+  contentHeight?: number | string;
 }
 
 export const ModalView: React.FC<ModalViewProps> = ({
   children,
   onClose = () => {},
+  contentHeight = Dimensions.get("screen").height - 100,
   ...props
 }) => {
   return (
@@ -22,7 +30,7 @@ export const ModalView: React.FC<ModalViewProps> = ({
         onPress={onClose}
       />
 
-      <View style={styles.container}>
+      <View style={[styles.container, { height: contentHeight }]}>
         <Background>
           <TouchableOpacity
             style={styles.bar}

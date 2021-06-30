@@ -5,10 +5,11 @@ import { theme } from "../../styles/theme";
 export const styles = StyleSheet.create({
   overlay: {
     backgroundColor: theme.colors.overlay,
-    height: 100,
+    width: "100%",
+    flex: 1,
   },
   container: {
-    flex: 1,
+    width: "100%",
   },
   bar: {
     width: 45,

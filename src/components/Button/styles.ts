@@ -3,13 +3,25 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../styles/theme";
 
 export const styles = StyleSheet.create({
-  container: {
+  filled: {
     width: "100%",
     height: 56,
     backgroundColor: theme.colors.primary,
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
     alignItems: "center",
     flexDirection: "row",
+  },
+  outlined: {
+    width: "100%",
+    height: 56,
+    backgroundColor: "transparent",
+    borderRadius: 8,
+    alignItems: "center",
+    flexDirection: "row",
+    borderWidth: 1,
+    borderColor: theme.colors.secondary30,
   },
   loadingContainer: {
     width: "100%",

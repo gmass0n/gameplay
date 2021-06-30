@@ -1,24 +1,33 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { View, FlatList } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getBottomSpace, isIphoneX } from "react-native-iphone-x-helper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BorderlessButton } from "react-native-gesture-handler";
+import { Feather } from "@expo/vector-icons";
 
-import { AddButton } from "../../components/AddButton";
 import { Appointment, AppointmentProps } from "../../components/Appointment";
 import { Background } from "../../components/Background";
 import { CategorySelect } from "../../components/CategorySelect";
 import { ListHeader } from "../../components/ListHeader";
 import { ListDivider } from "../../components/ListDivider";
 import { Profile } from "../../components/Profile";
+import { ListLoading } from "../../components/ListLoading";
+import {
+  ConfirmSignOutModal,
+  ConfirmSignOutModalHandles,
+} from "../../components/ConfirmSignOutModal";
 
 import { STORAGE_APPOINTMENTS_KEY } from "../../configs/storage";
 
+import { theme } from "../../styles/theme";
+
 import { styles } from "./styles";
-import { ListLoading } from "../../components/ListLoading";
 
 export const Home: React.FC = () => {
   const navigation = useNavigation();
+
+  const confirmSignOutModalRef = useRef<ConfirmSignOutModalHandles>(null);
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [appointments, setAppointments] = useState<AppointmentProps[]>([]);
@@ -70,6 +79,10 @@ export const Home: React.FC = () => {
     });
   }
 
+  function handleOpenConfirmSignOutModal(): void {
+    confirmSignOutModalRef.current?.open();
+  }
+
   function handleNavigateToAppointmentCreate(): void {
     navigation.navigate("AppointmentCreate");
   }
@@ -80,7 +93,10 @@ export const Home: React.FC = () => {
         <View style={styles.header}>
           <Profile />
 
-          <AddButton onPress={handleNavigateToAppointmentCreate} />
+          {/* <AddButton onPress={handleNavigateToAppointmentCreate} /> */}
+          <BorderlessButton onPress={handleOpenConfirmSignOutModal}>
+            <Feather name="power" color={theme.colors.primary} size={24} />
+          </BorderlessButton>
         </View>
 
         <CategorySelect
@@ -118,6 +134,8 @@ export const Home: React.FC = () => {
           </View>
         )}
       </View>
+
+      <ConfirmSignOutModal ref={confirmSignOutModalRef} />
     </Background>
   );
 };

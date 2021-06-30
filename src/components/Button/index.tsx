@@ -11,21 +11,29 @@ import {
 import { styles } from "./styles";
 import { theme } from "../../styles/theme";
 
+type ButtonType = "filled" | "outlined";
 interface ButtonProps extends RectButtonProps {
   title: string;
   icon?: ImageSourcePropType;
   isLoading?: boolean;
+  type?: ButtonType;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   title,
   icon,
   isLoading,
+  style,
+  type = "filled",
   ...props
 }) => {
   return (
     <RectButton
-      style={[styles.container, { opacity: isLoading ? 0.7 : 1 }]}
+      style={[
+        type === "filled" ? styles.filled : styles.outlined,
+        { opacity: isLoading ? 0.7 : 1 },
+        style,
+      ]}
       enabled={!isLoading}
       {...props}
     >

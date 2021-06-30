@@ -26,6 +26,7 @@ type AuthorizationResponse = AuthSession.AuthSessionResult & {
 interface IAuthContextData {
   user: User | null;
   signIn(): Promise<void>;
+  signOut(): Promise<void>;
   isLoading: boolean;
 }
 
@@ -98,8 +99,14 @@ const AuthProvider: React.FC = ({ children }) => {
     }
   }, []);
 
+  const signOut = useCallback(async () => {
+    await AsyncStorage.removeItem(STORAGE_USER_KEY);
+    setUser(null);
+    api.defaults.headers.authorization = "";
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, signIn, isLoading }}>
+    <AuthContext.Provider value={{ user, signIn, isLoading, signOut }}>
       {children}
     </AuthContext.Provider>
   );

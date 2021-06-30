@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 24,
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
     marginTop: isIphoneX() ? getStatusBarHeight() + 38 : 24,
     marginBottom: 30,
